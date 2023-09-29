@@ -8,36 +8,37 @@
     </head>
 
     <body>
+        <div id="param_box">
+            <div class="param" id="harmonies_box">
+                <label for="harmonies">Select an harmony:</label>
+                <select id="harmonies" name="harmonies" onchange="set_harmony()">
+                    <option hidden></option>
+                    <option value="Major">Major</option>
+                    <option value="Minor">Minor</option>
+                </select>
+            </div>
+
+            <div class="param" id="tones_box">
+                <label for="tones">Select a tone:</label>
+                <select id="tones" name="tones" onchange="set_tone_and_scale()">
+                    <option hidden></option>
+                </select>
+            </div>
+
+            <div class="param" id="degrees_box">
+                <label for="degrees_sequences" >Select a degrees sequence:</label>
+                <select disabled id="degrees_sequences" name="degrees_sequences" onchange="set_sequence()">
+                </select>
+            </div>
+        </div>
+
+        <div id="sequence_image_box">
+            <img id="sequence_image" src="">
+        </div>
+
         
-        <div id="harmonies_box">
-            <label for="harmonies">Select an harmony:</label>
-            <select id="harmonies" name="harmonies" onchange="set_harmony()">
-                <option hidden></option>
-                <option value="Major">Major</option>
-                <option value="Minor">Minor</option>
-            </select>
-        </div>
-
-        <div id="tones_box" hidden>
-            <label for="tones">Select a tone:</label>
-            <select id="tones" name="tones" onchange="set_tone_and_scale()">
-                <option hidden></option>
-            </select>
-        </div>
-
-        <div id="degrees_box" hidden>
-            <label for="degrees_sequences" >Select a degrees sequence:</label>
-            <select id="degrees_sequences" name="degrees_sequences" onchange="set_sequence()">
-            </select>
-        </div>
-
-        <img id="sequence_image" src="">
 
         <div id="chords_box">
-            <img class="chord_image" id="chord_image0" src="">
-            <img class="chord_image" id="chord_image1" src="">
-            <img class="chord_image" id="chord_image2" src="">
-            <img class="chord_image" id="chord_image3" src="">
         </div>
 
     </body>

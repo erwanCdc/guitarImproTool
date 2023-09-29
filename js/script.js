@@ -83,84 +83,85 @@ var sequence_image = document.getElementById("sequence_image");
 var select_harmonies = document.getElementById("harmonies");
 var select_tones = document.getElementById("tones");
 var select_degrees_sequence = document.getElementById("degrees_sequences");
+
 var harmony = undefined;
 var tone = undefined;
 var scale = undefined;
-var degree_sequence = [];
-
-function init(){
-
-    tones.forEach((tone) => {
-        var option = document.createElement('option');
-        option.value = tone;
-        option.textContent = tone;
-        select_tones.appendChild(option);
-    })
-}
-
+var degree_sequence = undefined;
+var chords_sequence = [];
 
 function set_harmony(){
-    var selected_option = select_harmonies.options[select_harmonies.selectedIndex].text;
-    harmony = selected_option;
-    var tones_box = document.getElementById("tones_box");
-    tones_box.hidden = false;
-    select_degrees_sequence.innerHTML = '';
-    sequence_image.src = '';
+    reset();
     var option = document.createElement('option');
     option.hidden = true;
-    select_degrees_sequence.appendChild(option);
-    if (harmony == "Major"){
-        Object.entries(major_degrees_sequences).forEach((sequence) => {
-            var option = document.createElement('option');
-            option.value = sequence[0];
-            option.textContent = sequence[0];
-            select_degrees_sequence.appendChild(option);
-        });
-    }
-    else {
-        Object.entries(minor_degrees_sequences).forEach((sequence) => {
-            var option = document.createElement('option');
-            option.value = sequence[0];
-            option.textContent = sequence[0];
-            select_degrees_sequence.appendChild(option);
-        });
-    }
-    
+    select_tones.appendChild(option);
+
+    Object.entries((harmony == "Major" ? major_scales : minor_scales)).forEach((elm) => {
+        var option = document.createElement('option');
+        option.value = elm[0];
+        option.textContent = elm[0];
+        select_tones.appendChild(option);
+    });
+
+    Object.entries((harmony == "Major") ? major_degrees_sequences : minor_degrees_sequences).forEach((sequence) => {
+        var option = document.createElement('option');
+        option.value = sequence[0];
+        option.textContent = sequence[0];
+        select_degrees_sequence.appendChild(option);
+    });
+
+    update();
 }
 
 function set_tone_and_scale(){
-    var selected_option = select_tones.options[select_tones.selectedIndex].text;
-    var tone = selected_option;
-    if (harmony == "Major") {scale = major_scales[tone]} else {scale = minor_scales[tone]}
-    var degrees_box = document.getElementById("degrees_box");
-    degrees_box.hidden = false;
+    var tone = select_tones.options[select_tones.selectedIndex].text;
+    scale = (harmony == "Major") ? scale = major_scales[tone] : minor_scales[tone];
+    if (chords_sequence.length > 0) set_sequence();
+    document.getElementById("degrees_sequences").disabled = false;
+    update();
 }
 
 function set_sequence(){
-    degree_sequence = [];
+    chords_sequence = [];
     sequence_image = document.getElementById("sequence_image");
-    var selected_option = select_degrees_sequence.options[select_degrees_sequence.selectedIndex].text;
-    if (harmony == "Major") {var sequence_path = (major_degrees_sequences[selected_option])} else {var sequence_path = (minor_degrees_sequences[selected_option])};
+    degree_sequence = select_degrees_sequence.options[select_degrees_sequence.selectedIndex].text;
+    var sequence_path = (harmony == "Major") ? major_degrees_sequences[degree_sequence] : minor_degrees_sequences[degree_sequence];
     sequence_image.src = sequence_path;
-    splited_sequence = selected_option.split('-');
+    splited_sequence = degree_sequence.split('-');
     splited_sequence.forEach((degree, index) => {
         let num = degrees[degree];
-        if (harmony == "Major") {
-            let chord = scale[num]+major_harmony[num];
-            degree_sequence.push(chord);
-            let chord_image = document.getElementById(`chord_image${index}`);
-            chord_image.src = `./data/img/chords/${chord}.png`;
-        } 
-        else {
-            let chord = scale[num]+minor_harmony[num];
-            degree_sequence.push(chord);
-            let chord_image = document.getElementById(`chord_image${index}`);
-            chord_image.src = `./data/img/chords/${chord}.png`;
-        };
+        let chord = scale[num];
+        if ((chord.length > 1) && (chord[1] == "#")) {chord = `${chord[0]}%23`} //replace '#' by '%23' for GET query
+        chord += (harmony == "Major") ? major_harmony[num] : minor_harmony[num];
+        chords_sequence.push(chord);
+        
     })
-    
+    update();
 }
 
-//TODOs : reset chord imgs function and other resets
+function update(){
+    if (chords_sequence) {
+        document.getElementById("chords_box").innerHTML = '';
+        chords_sequence.forEach((chord) => {
+            let chord_image = document.createElement('img');
+            chord_image.src = `./data/img/chords/${chord}.png`;
+            document.getElementById("chords_box").append(chord_image);
+        })
+    }
+}
 
-init();
+function reset(){
+    document.getElementById("degrees_sequences").disabled = true;
+    document.getElementById("sequence_image").src = '';
+    document.getElementById("chords_box").innerHTML = '';
+    select_tones.innerHTML = '';
+    tone = undefined;
+    scale = undefined;
+    degree_sequence = undefined;
+    chords_sequence = [];
+    select_degrees_sequence.innerHTML = '';
+    var option = document.createElement('option');
+    option.hidden = true;
+    select_degrees_sequence.appendChild(option);
+    harmony = select_harmonies.options[select_harmonies.selectedIndex].text;
+}
