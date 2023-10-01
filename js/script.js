@@ -70,7 +70,7 @@ const degrees = {
     "I": 0,
     "i": 0,
     "II": 1,
-    "ii": 0,
+    "ii": 1,
     "III": 2,
     "iii": 2,
     "IV": 3,
