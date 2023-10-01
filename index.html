@@ -4,12 +4,15 @@
     <head>
         <title>Guitar Improvisation Tool</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="icon" type="image/png" href="./data\img\other\guitar_emoji.png">
         <script src="js/script.js" defer></script>
     </head>
 
     <body>
         <div id="param_box">
+            <img class="header_img" src="./data\img\other\guitar_emoji.png">
             <div class="param" id="harmonies_box">
+                <span class="number">1st : </span>
                 <label for="harmonies">Select an harmony:</label>
                 <select id="harmonies" name="harmonies" onchange="set_harmony()">
                     <option hidden></option>
@@ -19,21 +22,24 @@
             </div>
 
             <div class="param" id="tones_box">
+                <span class="number">2nd : </span>
                 <label for="tones">Select a tone:</label>
-                <select id="tones" name="tones" onchange="set_tone_and_scale()">
+                <select disabled id="tones" name="tones" onchange="set_tone_and_scale()">
                     <option hidden></option>
                 </select>
             </div>
 
             <div class="param" id="degrees_box">
+                <span class="number">3rd : </span>
                 <label for="degrees_sequences" >Select a degrees sequence:</label>
                 <select disabled id="degrees_sequences" name="degrees_sequences" onchange="set_sequence()">
                 </select>
             </div>
+            <img class="header_img" src="./data\img\other\guitar_emoji.png">
         </div>
 
         <div id="sequence_image_box">
-            <img id="sequence_image" src="">
+            <img class="display_img" id="sequence_image" src="">
         </div>
 
         

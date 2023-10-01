@@ -1,11 +1,45 @@
+@font-face {
+  font-family: 'starife_demoregular';
+  src: url('../font/starifedemo-webfont.woff2') format('woff2'),
+       url('../font/starifedemo-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+html{
+    background-color: black;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+option{
+  font-family: 'starife_demoregular';
+}
+
+.header_img{
+  width: 70px;
+  height: 70px;
+}
+
+label{
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  font-family: 'starife_demoregular';
+}
+
 select {
+   font-family: 'starife_demoregular';
     width: 100%;
     min-width: 15ch;
     max-width: 30ch;
     border: 1px solid;
     border-radius: 0.25em;
     padding: 0.25em 0.5em;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     cursor: pointer;
     line-height: 1.1;
     background-color: #fff;
@@ -17,17 +51,36 @@ select {
     flex-direction: row;
     align-items: center;
     justify-content:space-around;
-    background-color: burlywood;
+    background-color: white;
+    border-radius: 50px;
+    padding: 20px;
+    margin-bottom: 4%;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 10px;
+  }
+
+  #tones:disabled{
+    cursor: not-allowed;
+  }
+
+  #degrees_sequences:disabled{
+    cursor: not-allowed;
+  }
+
+  .number{
+    font-size: 0.75em;
   }
 
   #sequence_image_box{
     text-align: center;
+    margin-bottom: 5%;
   }
 
   #chords_box{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
 
@@ -36,4 +89,9 @@ select {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .display_img{
+    background-color: white;
+    border-radius: 50px;
   }

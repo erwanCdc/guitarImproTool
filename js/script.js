@@ -5,7 +5,7 @@ const major_scales = {
     "Bb": ["Bb", "C", "D", "Eb", "F", "G", "A"],
     "B": ["B", "C#", "D#", "E", "F#", "G#", "A#"],
     //"B#": ["B#", "C##", "D##", "E#", "F##", "G##", "A##"],
-    "Cb": ["Cb", "Db", "Eb", "Fb", "Gb", "Ab", "Bb"],
+    //"Cb": ["Cb", "Db", "Eb", "Fb", "Gb", "Ab", "Bb"],
     "C": ["C", "D", "E", "F", "G", "A", "B"],
     "C#": ["C#", "D#", "E#", "F#", "G#", "A#", "B#"],
     "Db": ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"],
@@ -49,11 +49,21 @@ const minor_scales = {
 }
 
 const major_degrees_sequences = {
+    "vi-IV-vi-IV": "./data/img/degrees_sequences/vi-IV-vi-IV.png",
+    "I-iii-IV-vi": "./data/img/degrees_sequences/I-iii-IV-vi.png",
+    "I-ii-IV-V": "./data/img/degrees_sequences/I-ii-IV-V.png",
+    "I-ii-V-I": "./data/img/degrees_sequences/I-ii-V-I.png",
+    "I-IV": "./data/img/degrees_sequences/I-IV.png",
+    "I-IV-iii-vi": "./data/img/degrees_sequences/I-IV-iii-vi.png",
     "I-IV-V": "./data/img/degrees_sequences/I-IV-V.png",
+    "I-V-I": "./data/img/degrees_sequences/I-V-I.png",
+    "vi-IV-vi-IV": "./data/img/degrees_sequences/vi-IV-vi-IV.png",
+    "vi-V-I-IV": "./data/img/degrees_sequences/vi-V-I-IV.png",
+    "vi-V-IV-V": "./data/img/degrees_sequences/vi-V-IV-V.png",
 }
 
 const minor_degrees_sequences = {
-    "i-VII-VI": "./data/img/degrees_sequences/i-VII-VI.png",
+    "i-iv-v-iv": "./data/img/degrees_sequences/i-iv-v-iv.png",
 }
 
 const degrees = {
@@ -110,6 +120,8 @@ function set_harmony(){
         select_degrees_sequence.appendChild(option);
     });
 
+    select_tones.disabled = false;
+
     update();
 }
 
@@ -145,6 +157,7 @@ function update(){
         chords_sequence.forEach((chord) => {
             let chord_image = document.createElement('img');
             chord_image.src = `./data/img/chords/${chord}.png`;
+            chord_image.className = "display_img"
             document.getElementById("chords_box").append(chord_image);
         })
     }
